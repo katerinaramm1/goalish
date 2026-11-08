@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f7f5">
+  <meta name="theme-color" content="#f4f8ff">
   <meta name="description" content="Turn your creator goals into small, trackable steps. Free, private, and built for sharing wins.">
   <title>Goalish — Turn your goals into progress</title>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("goalish.theme")||((matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script>
   <style>
     :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1b2522;background:#f7f7f5;font-synthesis:none}
     *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #82bba7;outline-offset:2px}
@@ -19,11 +20,43 @@
     #goatcounter-total #gcvc-views{font-weight:750!important;font-size:13px!important;color:#2d5949!important}
     @media(max-width:760px){.shell{padding:18px 16px 50px}.top{margin-bottom:34px}.hero{grid-template-columns:1fr}.hero-art{min-height:145px}.hero h1{letter-spacing:-1.5px}.grid,.triple{grid-template-columns:1fr}.panel{padding:18px}.stats{gap:14px}.challenge-head{flex-direction:column}.task{flex-wrap:wrap}.task time{margin-left:30px}.edit-progress{flex-wrap:wrap}}
     @media(prefers-reduced-motion:no-preference){.primary,.secondary{transition:transform .12s}.primary:hover,.secondary:hover{transform:translateY(-1px)}}
+
+    /* Goalish blue palette: gentle surfaces in light mode, deep navy at night. */
+    :root{color-scheme:light;--bg:#f4f8ff;--surface:#fff;--text:#152c4e;--muted:#5f718c;--border:#dce6f4;--soft:#eaf2ff;--soft-border:#d4e3fa;--accent:#2869d4;--accent-dark:#1e56b0;--accent-ink:#2256a2;--progress:#347bdc;--hover:#eaf1ff;--toast:#142f59;--shadow:0 8px 28px rgba(24,70,132,.045);background:var(--bg);color:var(--text)}
+    :root[data-theme="dark"]{color-scheme:dark;--bg:#0d1728;--surface:#17243a;--text:#edf4ff;--muted:#abbcd3;--border:#30415d;--soft:#1c3455;--soft-border:#345278;--accent:#75afff;--accent-dark:#568fe2;--accent-ink:#a7cfff;--progress:#7aafff;--hover:#223956;--toast:#233f64;--shadow:0 8px 28px rgba(0,0,0,.12)}
+    body{background:var(--bg);color:var(--text)}
+    .muted,.foot,.task time,.task-info small,.field small,.task.done label{color:var(--muted)}
+    .eyebrow{color:var(--accent-ink)}
+    .brand-mark,.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    :root[data-theme="dark"] .primary,:root[data-theme="dark"] .brand-mark{color:#0b203e}
+    .hero-art,.hint{background:var(--soft);border-color:var(--soft-border);color:var(--text)}
+    .hero-art .muted{color:var(--muted)}
+    .panel,.pill,.secondary,.field input,.field select{background:var(--surface);border-color:var(--border);color:var(--text)}
+    .panel{box-shadow:var(--shadow)}
+    .tag{background:var(--soft);color:var(--accent-ink)}
+    .blank{color:var(--muted);border-color:var(--border)}.blank strong{color:var(--text)}
+    .task{border-color:var(--border)}.task input{accent-color:var(--accent)}
+    .bar{background:var(--soft)}.bar span{background:var(--progress)}
+    .divider{background:var(--border)}.toast{background:var(--toast)}
+    .counter-label,#goatcounter-total #gcvc-views{color:var(--muted)!important}
+    #goatcounter-total,#goatcounter-total *,#goatcounter-total div,#goatcounter-total svg{background:transparent!important;border:none!important;outline:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0!important}
+    #goatcounter-total{min-height:0;line-height:1.4}
+    .card-picker{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:17px 0 10px}
+    .card-picker label{font-size:13px;font-weight:750}
+    .card-picker select{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px;max-width:100%}
+    .theme-toggle{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 13px;display:inline-flex;gap:7px;align-items:center;font-size:13px;font-weight:700;white-space:nowrap}
+    .theme-toggle:hover,.secondary:hover{background:var(--hover)}
+    .header-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .foot{display:grid;gap:11px;line-height:1.5}
+    .foot a{color:var(--accent-ink);text-decoration:none;font-weight:700}.foot a:hover{text-decoration:underline}
+    .footer-disclaimer{max-width:680px;margin:0 auto}
+    @media(max-width:480px){.top{align-items:flex-start}.header-actions .pill{display:none}.theme-toggle{padding:8px 10px}}
+    button:focus-visible,input:focus-visible,select:focus-visible{outline-color:var(--accent)}
   </style>
 </head>
 <body>
 <main class="shell">
-  <header class="top"><div class="brand"><span class="brand-mark">↗</span> Goalish<span class="tiny muted">beta</span></div><span class="pill">● Free · Local-first</span></header>
+  <header class="top"><div class="brand"><span class="brand-mark">↗</span> Goalish<span class="tiny muted">beta</span></div><div class="header-actions"><span class="pill">● Free · Local-first</span><button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">☾ Dark mode</button></div></header>
   <section class="hero" aria-labelledby="headline"><div><span class="eyebrow">For creators & indie builders</span><h1>Big goals.<br>Small steps.<br>Real progress.</h1><p class="muted">Turn your next big challenge into practical milestones. Track your progress, celebrate the wins, and share the journey — no signup required.</p></div><aside class="hero-art"><span class="pill" style="align-self:start">Your next milestone is closer than you think</span><div><strong>01 → 02 → 03</strong><div class="muted">Plan. Make progress. Repeat.</div></div></aside></section>
   <section class="panel" aria-labelledby="create-title"><div class="section-heading"><h2 id="create-title">Start a challenge</h2><span class="tag">30-second setup</span></div><p class="hint">Your data stays in this browser. There are no accounts or automatic social-media connections. We use privacy-conscious GoatCounter analytics for aggregate site visits; your goals remain in this browser. Export a backup if you want to keep your progress across devices.</p>
     <form id="goal-form"><div class="grid"><div class="field"><label for="category">Challenge template</label><select id="category" required><option value="followers">Grow my social audience</option><option value="revenue">Reach a revenue goal</option><option value="launch">Launch a project</option><option value="content">Publish consistently</option><option value="custom">Build my own challenge</option></select></div><div class="field"><label for="username">Your username (for share cards)</label><input id="username" maxlength="45" placeholder="@yourhandle" autocomplete="off"></div></div>
@@ -35,7 +68,8 @@
   <section class="section panel"><div class="section-heading"><h2>Back up your progress</h2></div><p class="muted welcome">Browser storage can be cleared. Export your data regularly; importing replaces the current saved challenges.</p><div class="actions"><button id="export-data" class="secondary" type="button">↓ Export JSON backup</button><button id="import-data" class="secondary" type="button">↑ Import backup</button><input id="import-file" class="hidden" type="file" accept=".json,application/json" aria-label="Import JSON backup"></div></section>
   <footer class="foot">
     <div><strong>goalish.</strong> · Made for real progress, not perfect streaks.</div>
-    <div>Achievements are self-reported. Goals stay in your browser.</div>
+    <div>Created by <a href="https://x.com/katerinaramm1" target="_blank" rel="noopener noreferrer">@katerinaramm1 on X</a> with ChatGPT Plus.</div>
+    <div class="footer-disclaimer">Just for fun! Goalish may help you organize your goals, make progress, and spark conversations between us. Suggestions are not guarantees of results; achievements and progress are self-reported.</div>
     <div class="visitor-count" aria-label="Total website visits">
       <span class="counter-label">👥 Total site visits</span>
       <div id="goatcounter-total" aria-live="off"><span class="muted">Loading count…</span></div>
@@ -45,6 +79,10 @@
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 <script>
 'use strict';
+const THEME_KEY='goalish.theme';
+function applyTheme(theme){const selected=theme==='dark'?'dark':'light';document.documentElement.dataset.theme=selected;const button=document.querySelector('#theme-toggle');button.textContent=selected==='dark'?'☀ Light mode':'☾ Dark mode';button.setAttribute('aria-label',selected==='dark'?'Switch to light mode':'Switch to dark mode');button.setAttribute('aria-pressed',String(selected==='dark'));document.querySelector('meta[name="theme-color"]').content=selected==='dark'?'#0d1728':'#f4f8ff'}
+applyTheme(document.documentElement.dataset.theme);
+document.querySelector('#theme-toggle').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);try{localStorage.setItem(THEME_KEY,next)}catch(e){}});
 const KEY='goalish.challenges.v1';
 const $=s=>document.querySelector(s);
 const templates={
@@ -70,25 +108,83 @@ function load(){try{const raw=localStorage.getItem(KEY);if(raw){const parsed=JSO
 function isValidGoal(g){return g&&typeof g.id==='string'&&typeof g.title==='string'&&g.title.length<=110&&typeof g.deadline==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(g.deadline)&&Number.isFinite(g.target)&&g.target>0&&Number.isFinite(g.current)&&g.current>=0&&Array.isArray(g.tasks)&&g.tasks.length<=30&&g.tasks.every(t=>t&&typeof t.text==='string'&&t.text.length<=250&&typeof t.done==='boolean'&&/^\d{4}-\d{2}-\d{2}$/.test(t.due||''))}
 function percent(g){return Math.max(0,Math.min(100,Math.round(g.current/g.target*100)))}
 function goalDone(g){return g.current>=g.target}
+function stepsDone(g){return g.tasks.filter(t=>t.done).length}
+function stepsComplete(g){return g.tasks.length>0 && stepsDone(g)===g.tasks.length}
 function makeGoal(form){const category=$('#category').value;const start=todayStr(),deadline=$('#deadline').value;const steps=templates[category]||templates.custom;
  return {id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),category,title:$('#title').value.trim(),username:$('#username').value.trim(),start,deadline,initial:Number($('#current').value),current:Number($('#current').value),target:Number($('#target').value),tasks:steps.map((text,i)=>({id:String(i),text,done:false,due:offsetDate(start,deadline,(i+1)/steps.length)})),createdAt:new Date().toISOString()};}
 function updateForm(){const defaults={followers:['Reach 10,000 followers on X',2000,10000],revenue:['Earn $10,000 from my side project',0,10000],launch:['Launch my first web app',0,1],content:['Publish 30 useful posts',0,30],custom:['Complete my next big challenge',0,100]};const c=$('#category').value,d=defaults[c];$('#title').value=d[0];$('#current').value=d[1];$('#target').value=d[2]}
 function render(){const host=$('#challenges');$('#challenge-count').textContent=`${goals.length} challenge${goals.length===1?'':'s'}`;if(!goals.length){host.innerHTML='<div class="blank"><strong>Nothing here yet</strong>Create your first challenge above to get started.</div>';return}
- host.innerHTML=goals.map(g=>{const p=percent(g),complete=goalDone(g),taskCount=g.tasks.filter(t=>t.done).length;return `<article class="panel challenge" data-id="${escapeHTML(g.id)}"><div class="challenge-head"><div><span class="tag">${escapeHTML(descriptions[g.category]||'Challenge')}</span><h3 style="margin-top:12px">${escapeHTML(g.title)}</h3><div class="muted tiny">${escapeHTML(g.username||'Your challenge')} · Deadline ${formatDate(g.deadline)}</div></div>${complete?'<span class="pill">✓ Target reached</span>':'<span class="pill">↗ In progress</span>'}</div><div class="stats"><div class="stat"><span class="muted tiny">Current / target</span><strong class="count">${number(g.current)} / ${number(g.target)}</strong></div><div class="stat"><span class="muted tiny">Goal progress</span><strong class="count">${p}%</strong></div><div class="stat"><span class="muted tiny">Actions done</span><strong class="count">${taskCount} / ${g.tasks.length}</strong></div></div><div class="bar" role="progressbar" aria-label="Goal progress" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><span style="width:${p}%"></span></div><form class="edit-progress"><div class="field"><label for="progress-${escapeHTML(g.id)}">Update current number</label><input id="progress-${escapeHTML(g.id)}" name="progress" type="number" step="any" min="0" required value="${g.current}"></div><button class="secondary" type="submit">Save progress</button></form><div class="divider"></div><div class="progress-row"><strong>Action roadmap</strong><span class="tiny muted">Editable plan coming later</span></div><div class="tasks">${g.tasks.map((t,i)=>`<div class="task ${t.done?'done':''}"><input type="checkbox" id="task-${escapeHTML(g.id)}-${i}" data-task="${i}" ${t.done?'checked':''}><div class="task-info"><label for="task-${escapeHTML(g.id)}-${i}">${escapeHTML(t.text)}</label><small>Step ${i+1}</small></div><time datetime="${t.due}">${formatDate(t.due)}</time></div>`).join('')}</div><div class="actions"><button type="button" class="secondary" data-action="calendar">↗ Add steps to calendar</button><button type="button" class="secondary" data-action="card">↓ Download share card</button><button type="button" class="secondary" data-action="share">Share on X</button><button type="button" class="secondary danger" data-action="delete">Delete</button></div><p class="tiny muted" style="margin-bottom:0">Planning dates are suggestions. Cards show self-reported progress, not verified results.</p></article>`}).join('')}
+ host.innerHTML=goals.map(g=>{const p=percent(g),complete=goalDone(g),taskCount=stepsDone(g);return `<article class="panel challenge" data-id="${escapeHTML(g.id)}"><div class="challenge-head"><div><span class="tag">${escapeHTML(descriptions[g.category]||'Challenge')}</span><h3 style="margin-top:12px">${escapeHTML(g.title)}</h3><div class="muted tiny">${escapeHTML(g.username||'Your challenge')} · Deadline ${formatDate(g.deadline)}</div></div>${complete&&stepsComplete(g)?'<span class="pill">✓ Challenge completed</span>':complete?'<span class="pill">✓ Target reached</span>':stepsComplete(g)?'<span class="pill">✓ All steps completed</span>':'<span class="pill">↗ In progress</span>'}</div><div class="stats"><div class="stat"><span class="muted tiny">Current / target</span><strong class="count">${number(g.current)} / ${number(g.target)}</strong></div><div class="stat"><span class="muted tiny">Goal progress</span><strong class="count">${p}%</strong></div><div class="stat"><span class="muted tiny">Actions done</span><strong class="count">${taskCount} / ${g.tasks.length}</strong></div></div><div class="bar" role="progressbar" aria-label="Goal progress" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><span style="width:${p}%"></span></div><form class="edit-progress"><div class="field"><label for="progress-${escapeHTML(g.id)}">Update current number</label><input id="progress-${escapeHTML(g.id)}" name="progress" type="number" step="any" min="0" required value="${g.current}"></div><button class="secondary" type="submit">Save progress</button></form><div class="divider"></div><div class="progress-row"><strong>Action roadmap</strong><span class="tiny muted">Editable plan coming later</span></div><div class="tasks">${g.tasks.map((t,i)=>`<div class="task ${t.done?'done':''}"><input type="checkbox" id="task-${escapeHTML(g.id)}-${i}" data-task="${i}" ${t.done?'checked':''}><div class="task-info"><label for="task-${escapeHTML(g.id)}-${i}">${escapeHTML(t.text)}</label><small>Step ${i+1}</small></div><time datetime="${t.due}">${formatDate(t.due)}</time></div>`).join('')}</div><div class="card-picker"><label for="card-type-${escapeHTML(g.id)}">Share card type</label><select id="card-type-${escapeHTML(g.id)}" data-card-type><option value="accepted">🚀 Challenge Accepted</option><option value="progress" ${taskCount||g.current>g.initial?'selected':''}>📈 Progress Update</option><option value="completed" ${(complete&&stepsComplete(g))?'selected':''} ${!(complete&&stepsComplete(g))?'disabled':''}>🏆 Goal Completed${!(complete&&stepsComplete(g))?' (finish all steps + target)':''}</option></select></div><div class="actions"><button type="button" class="secondary" data-action="calendar">↗ Add steps to calendar</button><button type="button" class="secondary" data-action="card">↓ Download selected card</button><button type="button" class="secondary" data-action="share">Share on X · @katerinaramm1</button><button type="button" class="secondary" data-action="copy-post">Copy X Post</button><button type="button" class="secondary danger" data-action="delete">Delete</button></div><p class="tiny muted" style="margin-bottom:0">Planning dates are suggestions. Cards show self-reported progress, not verified results.</p></article>`}).join('')}
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 function filename(g){return g.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,45)||'challenge'}
 function icsEscape(s){return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n')}
 function toICS(g){const now=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const entries=g.tasks.map((t,i)=>{const day=t.due.replaceAll('-','');const next=parseDate(t.due);next.setDate(next.getDate()+1);const end=localISO(next).replaceAll('-','');return ['BEGIN:VEVENT',`UID:${g.id}-${i}@goalish.local`,`DTSTAMP:${now}`,`DTSTART;VALUE=DATE:${day}`,`DTEND;VALUE=DATE:${end}`,`SUMMARY:${icsEscape('Step '+(i+1)+': '+t.text)}`,`DESCRIPTION:${icsEscape('Challenge: '+g.title+' | Suggested milestone')}`,'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY',`DESCRIPTION:${icsEscape('Upcoming Goalish milestone')}`,'END:VALARM','END:VEVENT'].join('\r\n')});return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Goalish//Creator Challenges//EN','CALSCALE:GREGORIAN',...entries,'END:VCALENDAR'].join('\r\n')+'\r\n'}
 function wrapText(ctx,str,maxW){const words=str.split(/\s+/),lines=[];let line='';for(const w of words){const next=line?line+' '+w:w;if(ctx.measureText(next).width>maxW&&line){lines.push(line);line=w}else{line=next}}if(line)lines.push(line);return lines}
-function cardCanvas(g){const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1350;const c=canvas.getContext('2d');c.fillStyle='#163c30';c.fillRect(0,0,1080,1350);c.fillStyle='#204d3d';c.beginPath();c.arc(940,150,390,0,2*Math.PI);c.fill();c.fillStyle='#33715a';c.beginPath();c.arc(1020,160,230,0,2*Math.PI);c.fill();c.fillStyle='#d8e8db';c.font='bold 40px system-ui';c.fillText('↗ GOALISH',86,118);c.fillStyle='#a9d6b8';c.font='bold 31px system-ui';c.fillText(goalDone(g)?'CHALLENGE COMPLETED':'MY CREATOR CHALLENGE',86,350);c.fillStyle='#fff';c.font='bold 110px system-ui';c.fillText(goalDone(g)?'I DID IT!':percent(g)+'% DONE',82,490);c.font='bold 62px system-ui';let lines=wrapText(c,g.title,910).slice(0,4);lines.forEach((line,i)=>c.fillText(line,86,625+i*79));c.fillStyle='#a9d6b8';c.font='34px system-ui';c.fillText(`${number(g.current)} of ${number(g.target)} reached`,86,960);c.fillStyle='#386b54';c.fillRect(86,1005,908,20);c.fillStyle='#a8dbb9';c.fillRect(86,1005,908*percent(g)/100,20);c.fillStyle='#fff';c.font='bold 37px system-ui';c.fillText((g.username||'Creator').slice(0,45),86,1160);c.fillStyle='#b3ccbc';c.font='27px system-ui';c.fillText('Goal deadline: '+formatDate(g.deadline),86,1214);c.font='23px system-ui';c.fillText('Self-reported progress · Made with Goalish',86,1288);return canvas}
-async function saveCard(g){const canvas=cardCanvas(g);const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(blob)download(blob,filename(g)+'-card.png');else notify('Could not generate this image.')}
-function shareX(g){const text=goalDone(g)?`I did it! 🎉 ${g.title} — ${number(g.current)} reached. ${g.username||''}`:`My challenge: ${g.title}\nProgress: ${number(g.current)}/${number(g.target)} (${percent(g)}%)\nDeadline: ${formatDate(g.deadline)}\n${g.username||''}`;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank','noopener,noreferrer');notify('X will open with text only. Download and attach the card image separately.')}
+function selectedCardType(article,g){
+ const mode=article?.querySelector('[data-card-type]')?.value||'progress';
+ return mode==='completed'&&!(goalDone(g)&&stepsComplete(g))?'progress':mode;
+}
+function cardCanvas(g,mode='progress'){
+ const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1350;
+ const c=canvas.getContext('2d');const done=stepsDone(g),total=g.tasks.length,p=percent(g);
+ const completed=goalDone(g)&&stepsComplete(g);
+ if(mode==='completed'&&!completed)mode='progress';
+ const accent=mode==='completed'?'#b7e4c7':mode==='accepted'?'#c2d9ff':'#8ec5ff';
+ const muted='#bbd4f1';
+ c.fillStyle='#10274a';c.fillRect(0,0,1080,1350);
+ c.fillStyle='#173968';c.beginPath();c.arc(950,135,400,0,Math.PI*2);c.fill();
+ c.fillStyle='#24538c';c.beginPath();c.arc(1030,155,230,0,Math.PI*2);c.fill();
+ c.fillStyle='#fff';c.font='bold 42px system-ui';c.fillText('↗ GOALISH',86,117);
+ c.fillStyle=accent;c.font='bold 29px system-ui';
+ const label=mode==='accepted'?'CHALLENGE ACCEPTED':mode==='completed'?'CHALLENGE COMPLETED':'PROGRESS UPDATE';
+ c.fillText(label,86,316);
+ c.fillStyle='#fff';c.font='bold 77px system-ui';
+ const headline=mode==='accepted'?'I AM GOING FOR IT!':mode==='completed'?'I DID IT!':`${done} OF ${total} STEPS`;
+ c.fillText(headline,82,432);
+ c.font='bold 58px system-ui';
+ wrapText(c,g.title,908).slice(0,4).forEach((line,i)=>c.fillText(line,86,550+i*76));
+ // Intent and steps both appear without claiming unverified achievement.
+ c.fillStyle=muted;c.font='bold 32px system-ui';
+ c.fillText(mode==='accepted'?`My roadmap: ${total} steps`: `Steps completed: ${done} / ${total}`,86,901);
+ c.fillStyle='#335681';c.fillRect(86,931,908,19);
+ c.fillStyle=accent;c.fillRect(86,931,908*(mode==='accepted'?0:(total?done/total:0)),19);
+ c.fillStyle=muted;c.font='31px system-ui';
+ c.fillText(mode==='accepted'?`Starting: ${number(g.initial??g.current)}  ·  Target: ${number(g.target)}`:`Goal: ${number(g.current)} / ${number(g.target)} (${p}%)`,86,1015);
+ c.fillStyle='#335681';c.fillRect(86,1044,908,16);
+ c.fillStyle=accent;c.fillRect(86,1044,908*(mode==='accepted'?Math.min(1,(g.initial??g.current)/g.target):p/100),16);
+ c.fillStyle='#fff';c.font='bold 36px system-ui';c.fillText((g.username||'Creator').slice(0,45),86,1158);
+ c.fillStyle=muted;c.font='27px system-ui';c.fillText('Deadline: '+formatDate(g.deadline),86,1213);
+ c.font='23px system-ui';c.fillText('Self-reported · goalish · Made with ChatGPT Plus',86,1288);
+ return canvas;
+}
+async function saveCard(g,mode){const canvas=cardCanvas(g,mode);const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(blob)download(blob,filename(g)+'-'+mode+'-card.png');else notify('Could not generate this image.')}
+function xPostText(g,mode){
+ const completed=stepsDone(g),total=g.tasks.length;
+ const message=mode==='accepted'?`Challenge accepted! 🚀\n${g.title}\n${total} steps to tackle by ${formatDate(g.deadline)}. Let's go!`:
+ mode==='completed'?`I DID IT! 🎉\n${g.title}\n✅ ${completed}/${total} steps completed and my target reached!`:
+ `My Goalish update 📈\n${g.title}\n✅ ${completed}/${total} steps done\n🎯 ${number(g.current)}/${number(g.target)} (${percent(g)}%)`;
+ return `${message}\n\n${g.username||''}\nCreated using Goalish by @katerinaramm1\nhttps://katerinaramm1.github.io/goalish/`.trim();
+}
+function shareX(g,mode){
+ const text=xPostText(g,mode);
+ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank','noopener,noreferrer');
+ notify('X opens with your text and @katerinaramm1. Download and attach your selected card separately.');
+}
+async function copyXPost(g,mode){
+ const text=xPostText(g,mode);
+ try{
+  if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(text);}
+  else{const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.left='-9999px';document.body.appendChild(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok)throw new Error('Copy unavailable');}
+  notify('X post copied! Paste it into X and customize it before sharing.');
+ }catch(e){notify('Could not copy automatically. Use Share on X instead.');}
+}
+
 $('#goal-form').addEventListener('submit',e=>{e.preventDefault();const target=Number($('#target').value),current=Number($('#current').value),deadline=$('#deadline').value,title=$('#title').value.trim();if(!title||!Number.isFinite(current)||current<0||!Number.isFinite(target)||target<=0||!deadline||deadline<todayStr()){notify('Enter a valid goal, target, and future deadline.');return}if(goals.length>=30){notify('Maximum of 30 local challenges. Export and remove old ones first.');return}const g=makeGoal();goals.unshift(g);persist();render();$('#challenges-title').scrollIntoView({behavior:'smooth'});notify('Your challenge is ready!')});
 $('#category').addEventListener('change',updateForm);
 $('#challenges').addEventListener('submit',e=>{if(!e.target.matches('.edit-progress'))return;e.preventDefault();const g=goals.find(x=>x.id===e.target.closest('[data-id]').dataset.id);if(!g)return;const value=Number(e.target.elements.progress.value);if(!Number.isFinite(value)||value<0){notify('Enter a valid, non-negative number.');return}g.current=value;persist();render();notify(goalDone(g)?'You reached your target! Download your completion card.':'Progress saved.')});
 $('#challenges').addEventListener('change',e=>{if(!e.target.matches('[data-task]'))return;const g=goals.find(x=>x.id===e.target.closest('[data-id]').dataset.id);if(!g)return;const i=Number(e.target.dataset.task);if(g.tasks[i]){g.tasks[i].done=e.target.checked;persist();render()}});
 $('#challenges').addEventListener('click',async e=>{const b=e.target.closest('[data-action]');if(!b)return;const g=goals.find(x=>x.id===b.closest('[data-id]').dataset.id);if(!g)return;const action=b.dataset.action;if(action==='calendar'){download(new Blob([toICS(g)],{type:'text/calendar;charset=utf-8'}),filename(g)+'.ics');notify('Calendar file downloaded. Import it into your preferred calendar.')}
-if(action==='card')await saveCard(g);if(action==='share')shareX(g);if(action==='delete'&&confirm(`Delete "${g.title}"? This cannot be undone unless you have a backup.`)){goals=goals.filter(x=>x.id!==g.id);persist();render();notify('Challenge deleted.')}});
+if(action==='card')await saveCard(g,selectedCardType(b.closest('[data-id]'),g));if(action==='share')shareX(g,selectedCardType(b.closest('[data-id]'),g));if(action==='copy-post')await copyXPost(g,selectedCardType(b.closest('[data-id]'),g));if(action==='delete'&&confirm(`Delete "${g.title}"? This cannot be undone unless you have a backup.`)){goals=goals.filter(x=>x.id!==g.id);persist();render();notify('Challenge deleted.')}});
 $('#export-data').addEventListener('click',()=>download(new Blob([JSON.stringify({app:'goalish',version:1,exportedAt:new Date().toISOString(),goals},null,2)],{type:'application/json'}),'goalish-backup.json'));
 $('#import-data').addEventListener('click',()=>$('#import-file').click());
 $('#import-file').addEventListener('change',async e=>{const f=e.target.files?.[0];e.target.value='';if(!f)return;if(f.size>1e6){notify('Backup file too large.');return}try{const data=JSON.parse(await f.text());if(!['goalish','stepwise'].includes(data.app)||data.version!==1||!Array.isArray(data.goals)||data.goals.length>30||!data.goals.every(isValidGoal)){notify('Invalid or unsupported backup file.');return}if(!confirm('Import this backup? It will replace all currently saved challenges.'))return;goals=data.goals;persist();render();notify('Backup imported successfully.')}catch(err){notify('Could not read the backup file.')}});
